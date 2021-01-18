@@ -17,7 +17,7 @@ public class LoginController {
     public String Index() { return "index";}
     @PostMapping("/dologin")
     public String doLogin(@ModelAttribute("user") User user, Model model) {
-        if (user.getEmail().equals("vinh.tran@codegym.com") &&
+        if (user.getEmail().equals("nhat41555@gmail.com") &&
                 user.getPassword().equals("12345")) {
             model.addAttribute("message", "Login success. Welcome: ");
         } else {
