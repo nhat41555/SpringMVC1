@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Add Student</h3>
+<p>
+    <a th:href="@{/student/list.html}">
+        Back to Student list
+    </a>
+</p>
+<h2 th:text="${success}"></h2>
+<div id="form">
+    <form action="#" th:action="@{/student/create}" th:object="${Student}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Name</label>
+            <input type="text" oninput="checkValidate(0,this)" th:field="*{name}"/>
+            <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+        </div>
+        <div>
+            <label>Age</label>
+            <input type="number" th:field="*{age}"/>
+            <span class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name Error</span>
+        </div>
+        <div>
+            <label>Year</label>
+            <input type="number" th:field="*{year}"/>
+            <span class="error" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Name Error</span>
+        </div>
+        <div>
+            <label>Class</label>
+            <select name="classStudentId">
+                <th:block th:each="item : ${listClass}">
+                    <option th:value="${item.getId()}" th:text="${item.getName()}"></option>
+                </th:block>
+            </select>
+        </div>
+
+
+        <input type="submit" value="Save"></input>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+<script>
+    function checkValidate(index, inp){
+        const error = document.getElementsByClassName("error");
+        if(inp.value.length>0){
+            error[index].style.display = 'none';
+        }else {
+            error[index].style.display = 'block';
+        }
+
+    }
+</script>
+</body>
+</html>
